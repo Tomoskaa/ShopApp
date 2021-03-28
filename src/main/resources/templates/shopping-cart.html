@@ -1,0 +1,68 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <th:block>
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">ИТ продавница</h1>
+                <h3 class="jumbotron-heading">Купувачка кошничка за
+                    <th:block th:if="${#request.getRemoteUser() != null}" th:text="${#request.getRemoteUser()}"></th:block>
+                </h3>
+            </div>
+        </section>
+
+        <div th:if="${hasError}">
+            <h5 class="text-center text-danger" th:text="${error}"></h5>
+        </div>
+
+
+        <div class="container mb-4">
+            <div class="row">
+                <div class="col-12" th:if="${products.size() > 0}">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Продукт</th>
+                                <th scope="col">Производител</th>
+                                <th scope="col">Категорија</th>
+                                <th scope="col">Цена</th>
+                                <th scope="col">Акција</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="product : ${products}" class="cart-item">
+                                <td th:text="${product.getName()}"></td>
+                                <td th:text="${product.getManufacturer() != null} ? ${product.getManufacturer().getName()} : 'No Manufacturer'"></td>
+                                <td th:text="${product.getCategory() != null} ? ${product.getCategory().getName()} : 'No Category'"></td>
+                                <td th:text="${product.getPrice()}"></td>
+
+                                <td class="text-right">
+                                    <th:block>
+                                        <form class="px-2" th:method="post"
+                                              th:action="@{/shopping-cart/remove-product/{id} (id=${product.getId()})}">
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash"></i>Бриши
+                                            </button>
+                                        </form>
+                                    </th:block>
+                                    <th:block>
+                                        <form>
+                                            <a class="px-2 btn btn-sm btn-primary edit-balloon"
+                                               href="/order/place"><i class="far fa-check-circle"></i>
+                                                Изврши нарачка
+                                            </a>
+                                        </form>
+                                    </th:block>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-12" th:if="${products.size() == 0}">
+                    Немате продукти во кошничката
+                    <a href="/products" class="btn btn-success">Купи продукти</a>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</div>

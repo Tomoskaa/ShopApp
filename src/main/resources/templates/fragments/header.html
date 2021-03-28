@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-dark text-white" xmlns:th="http://www.w3.org/1999/xhtml"
+     xmlns:sec="http://www.w3.org/1999/xhtml">
+    <a class="navbar-brand text-white" href="/products">ИТ продавница</a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+            <li class="nav-item">
+                <a class="nav-link text-white" href="/products">Почетна </a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Продукти
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/products">Преглед на сите продукти</a>
+                    <a class="dropdown-item" href="/categories">Преглед на сите категории</a>
+                    <a class="dropdown-item" href="/manufacturers">Преглед на сите производители</a>
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a class="dropdown-item" href="/products/add-form">Додади нов продукт</a>
+                    </th:block>
+                </div>
+            </li>
+        </ul>
+
+        <form action="/products/find" class="form-inline mx-1" th:method="post">
+            <div class="form-group">
+                <input id="text" name="text" type="text" placeholder="Пребарај...">
+            </div>
+
+
+            <button class="btn btn-primary mx-2" type="submit">Барај</button>
+        </form>
+
+        <a class="btn btn-danger" href="/products" type="submit"><i class="fas fa-eraser"></i> Бриши</a>
+
+        <ul class="nav navbar-nav navbar-right">
+            <th:block sec:authorize="isAuthenticated()">
+                <th:block th:if="${#request.getRemoteUser() != null}"/>
+                <a class="btn btn-warning btn-sm ml-3" href="/order/placed">
+                    <i class="fas fa-user-alt"></i>
+                    <th:block th:text="${#request.getRemoteUser()}"></th:block>
+                </a>
+                </th:block>
+            </th:block>
+            <th:block th:if="${#request.getRemoteUser() != null}">
+                <li class="nav-item">
+                    <a class="btn btn-success btn-sm ml-3" href="/shopping-cart">
+                        <i class="fas fa-shopping-cart"></i>Купувачка кошничка
+                    </a>
+                </li>
+            </th:block>
+            <th:block sec:authorize="!isAuthenticated()">
+                <a class="btn btn-light btn-sm ml-3" href="/logout">
+                    <i class="fas fa-sign-in-alt"></i> Најава
+                </a>
+            </th:block>
+
+            <th:block th:if="${#request.getRemoteUser() != null}">
+                <a class="btn btn-light btn-sm ml-3" href="/logout">
+                    <i class="fas fa-sign-out-alt"></i> Одајава
+                </a>
+            </th:block>
+        </ul>
+    </div>
+</nav>

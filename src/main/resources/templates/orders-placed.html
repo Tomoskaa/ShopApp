@@ -1,0 +1,52 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h3 class="jumbotron-heading">Извршени нарачки за
+                <th:block th:if="${#request.getRemoteUser() != null}"
+                          th:text="${#request.getRemoteUser()}"></th:block>
+            </h3>
+        </div>
+    </section>
+
+    <div th:if="${hasError}">
+        <h5 class="text-center text-danger" th:text="${error}"></h5>
+    </div>
+
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-12" th:if="${orders.size() > 0}">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Адреса</th>
+                            <th scope="col">Вкупно продукти</th>
+                            <th scope="col">Датум на нарачка</th>
+                            <th scope="col">Начин на плаќање</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="order : ${orders}">
+                            <td th:text="${order.getDeliveryAddress()}"></td>
+                            <td th:text="${order.getProducts().size()}"></td>
+                            <td th:text="${order.getTimestamp()}"></td>
+                            <td class="text-right">
+                                <th:block>
+                                    <form>
+                                        <button class="btn btn-sm btn-primary" href="/products" type="submit">
+                                            <i class="	fas fa-map-marked-alt"></i>При достава
+                                        </button>
+                                        <button class="btn btn-sm btn-primary" type="submit">
+                                            <i class="fab fa-cc-paypal"></i>Со картичка
+                                        </button>
+                                    </form>
+                                </th:block>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>

@@ -1,0 +1,49 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <div class="jumbotron text-center">
+        <h1>Преглед на вашата нарачка</h1>
+    </div>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-10">
+                <h3>Вашите продукти:</h3>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Име на продукт</th>
+                            <th scope="col">Производител</th>
+                            <th scope="col">Категорија</th>
+                            <th scope="col">Количина</th>
+                            <th scope="col">Единечна цена</th>
+                            <th scope="col">Вкупно</th>
+
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr th:each="product : ${products}">
+                            <td th:text="${product.getName()}"></td>
+                            <td th:text="${product.getManufacturer().getName()}"></td>
+                            <td th:text="${product.getCategory().getName()}"></td>
+                            <td th:text="${product.getQuantity()}"></td>
+                            <td th:text="${product.getPrice()}"></td>
+                            <td th:text="${product.getQuantity() * product.getPrice()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <form th:method="post" th:action="@{/order/place}">
+
+                    <div class="form-group">
+                        <label for="deliveryAddress">Вашата адреса:</label>
+                        <input type="text" class="form-control" name="deliveryAddress" id="deliveryAddress">
+                    </div>
+
+                    <button type="submit" class="col-md-12 btn btn-primary"><i class="fas fa-paper-plane">
+                    </i> Нарачај
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>

@@ -1,0 +1,83 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <th:block>
+        <div class="jumbotron text-center" th:if="${product} == null">
+            <h1>Додади нов продукт</h1>
+        </div>
+
+        <div class="jumbotron text-center" th:if="${product} != null">
+            <h1>Измени продукт</h1>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <form action="/products/add" method="POST">
+                        <div class="form-group">
+                            <label for="name">Име на продукт</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="name"
+                                   name="name"
+                                   th:value="(${product} != null ? ${product.getName()} : '')"
+                                   required
+                                   placeholder="Внесете име на продукт">
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Цена</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="price"
+                                   name="price"
+                                   th:value="(${product} != null ? ${product.getPrice()} : '')"
+                                   placeholder="Цена">
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity">Количина</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="quantity"
+                                   name="quantity"
+                                   th:value="(${product} != null ? ${product.getQuantity()} : '')"
+                                   placeholder="Количина">
+                        </div>
+                        <div class="form-group">
+                            <label>Категорија</label>
+                            <select name="category" class="form-control">
+                                <option th:if="${product} != null"
+                                        th:selected="${product.getCategory() != null &&
+                                product.getCategory().getId() == cat.getId()}"
+                                        th:each="cat : ${categories}"
+                                        th:value="${cat.getId()}"
+                                        th:text="${cat.getName()}">
+                                </option>
+                                <option th:if="${product} == null"
+                                        th:each="cat : ${categories}"
+                                        th:value="${cat.getId()}"
+                                        th:text="${cat.getName()}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Производител</label>
+                            <select name="manufacturer" class="form-control">
+                                <option th:if="${product} != null"
+                                        th:selected="${product.getManufacturer() != null && product.getManufacturer().getId() == man.getId()}"
+                                        th:each="man : ${manufacturers}"
+                                        th:value="${man.getId()}"
+                                        th:text="${man.getName()}">
+                                </option>
+                                <option th:if="${product} == null"
+                                        th:each="man : ${manufacturers}"
+                                        th:value="${man.getId()}"
+                                        th:text="${man.getName()}">
+                                </option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Потврди</button>
+                        <a type="button" class="btn btn-primary" href="/products">Назад</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</div>

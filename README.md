@@ -17,8 +17,17 @@ MVC архитектурата опфаќа:
 
 
 -Почетна страна кога немаме најавен корисник се прикажуваат сите продукти
+![1](https://user-images.githubusercontent.com/62152491/112756021-86fce180-8fe3-11eb-8557-40434fd53a1d.png)
 
 -Преглед од страна на корисник
+![најава](https://user-images.githubusercontent.com/62152491/112756027-8e23ef80-8fe3-11eb-90b8-ee74568b86a7.png)
+![регистрација](https://user-images.githubusercontent.com/62152491/112756034-90864980-8fe3-11eb-8032-b899c623ab9f.png)
+![приказ од страна на корисник](https://user-images.githubusercontent.com/62152491/112756037-91b77680-8fe3-11eb-80be-2b59455c6b91.png)
+![kosnicka](https://user-images.githubusercontent.com/62152491/112756042-9714c100-8fe3-11eb-979e-711494eea2cc.png)
+![naracaj](https://user-images.githubusercontent.com/62152491/112756046-98de8480-8fe3-11eb-905a-67c9c68b8384.png)
+![final](https://user-images.githubusercontent.com/62152491/112756048-9aa84800-8fe3-11eb-9f72-fdde7fa2e526.png)
+
 
 -Преглед од страна на администратор
 **Администраторот дополнително може да додава и едитира продукти**
+![адд](https://user-images.githubusercontent.com/62152491/112756052-9d0aa200-8fe3-11eb-86aa-1f3de23de642.png)
